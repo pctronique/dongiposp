@@ -8,6 +8,5 @@ if(!empty($sgbd_port) && $sgbd_port !== "0") {
     $configsgbd .= ';port=' . $sgbd_port;
 }
 $configsgbd .= ';dbname=' . $sgbd_dbname;
-$configsgbd .= ";charset=UTF8";
 
 $sgbd = new PDO($configsgbd, $sgbd_user, $sgbd_pass);
