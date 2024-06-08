@@ -17,7 +17,7 @@ fi
 
 if [ -z ${PHP_FOLDER_PROJECT} ]
 then
-    PHP_FOLDER_PROJECT=/usr/local/apache2/www/
+    PHP_FOLDER_PROJECT=/home/www/
 fi
 
 ${PHP_FOLDER_INIT}/importdata.sh 2>> ${PHP_FOLDER_LOG}/installdata.log

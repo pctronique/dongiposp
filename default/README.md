@@ -1,4 +1,4 @@
-# dongimarip : DOcker NGInx MARIadb Php
+# dongiposp : DOcker NGInx POStgres Ph
 Par [pctronique](https://pctronique.fr/) <br />
 Version 1.1.0
 
@@ -59,12 +59,13 @@ Pour Windows, Linux et Mac.
 Les versions :
 <ul>
   <li>nginx:1.26.0-perl</li>
-  <li>mariadb:10.4.18</li>
-  <li>phpmyadmin:5.2.1</li>
-  <li>mailhog:v1.0.0</li>
-  <li>apache:2.4.59</li>
+  <li>php:8.3.7RC1-fpm</li>
   <li>composer:2.7.4</li>
-  <li>Xdebug:3.3.2</li>
+  <li>xdebug:3.3.2</li>
+  <li>postgres:14.12</li>
+  <li>mailhog:v1.0.0</li>
+  <li>mhsendmail:v0.2.0</li>
+  <li>phppgadmin:7.13.0</li>
   <li>mhsendmail:v0.2.0</li>
 </ul>
 
@@ -98,8 +99,9 @@ $ cp .env.example .env
 Il est possible de modifier les ports dans le fichier « .env » (il est préférable de conserver les ports par défaut dans l’exemple).
 ```
 VALUE_NGINX_PORT=80
-VALUE_PHPMYADMIN_PORT=8080
+VALUE_PHPPGADMIN_PORT=8080
 VALUE_MAILHOG_PORT=8020
+VALUE_POSTGRES_PORT=5430
 ```
 
 > [!NOTE]
@@ -112,15 +114,17 @@ VALUE_MAILHOG_PORT=8020
 > => 1 pour le projet 1
 > ```
 > VALUE_NGINX_PORT=81
-> VALUE_PHPMYADMIN_PORT=8081
+> VALUE_PHPPGADMIN_PORT=8081
 > VALUE_MAILHOG_PORT=8021
+> VALUE_POSTGRES_PORT=5431
 > ```
 > 
 > => 2 pour le projet 2
 > ```
 > VALUE_NGINX_PORT=82
-> VALUE_PHPMYADMIN_PORT=8082
+> VALUE_PHPPGADMIN_PORT=8082
 > VALUE_MAILHOG_PORT=8022
+> VALUE_POSTGRES_PORT=5432
 > ```
 
 ### Création des conteneurs
@@ -233,6 +237,9 @@ Par le nouveau chemin :
 Il va permettre de récupérer les bases de données par défaut.
 Vous devez placer les fichiers sql dans le dossier « ./config/sgbd_data/ » pour récupérer une base de données par défaut.
 
+> [!WARNING]
+> Problème d'exportation de la base de données sur phppgadmin.
+
 ### Email data
 
 Il va permettre de récupérer les emails par défaut.
@@ -246,7 +253,7 @@ Vous devez les placer dans le fichier « ./config/dockercron ».
 Exemple (dans « ./config/dockercron ») :
 ```
 *  *  *  *  * echo "hello" >> /var/log/docker/php/testcron.log
-*  *  *  *  * echo "hello projet" >> /usr/local/apache2/www/testcron.log
+*  *  *  *  * echo "hello projet" >> /home/www//testcron.log
 ```
 
 > [!NOTE]
@@ -289,10 +296,10 @@ VALUE_NGINX_VERSION=1.26.0-perl
 VALUE_PHP_VERSION=8.3.7RC1-fpm
 VALUE_COMPOSER_VERSION=2.7.4
 VALUE_XDEBUG_VERSION=3.3.2
-VALUE_MARIABD_VERSION=10.4.18
+VALUE_POSTGRES_VERSION=14.12
 VALUE_MAILHOG_VERSION=v1.0.0
 VALUE_MHSENDMAIL_VERSION=v0.2.0
-VALUE_PHPMYADMIN_VERSION=5.2.1
+VALUE_PHPPGADMIN_VERSION=7.13.0
 ```
 
 > [!NOTE]
@@ -307,8 +314,11 @@ VALUE_NGINX_VERSION=perl
 VALUE_PHP_VERSION=fpm
 VALUE_COMPOSER_VERSION=latest
 VALUE_XDEBUG_VERSION=
-VALUE_MARIABD_VERSION=latest
+VALUE_POSTGRES_VERSION=latest
 VALUE_MAILHOG_VERSION=latest
 VALUE_MHSENDMAIL_VERSION=latest
-VALUE_PHPMYADMIN_VERSION=latest
+VALUE_PHPPGADMIN_VERSION=latest
 ```
+
+> [!WARNING]
+> Faire attention sur la compatibilité des versions entre postgres et phppgadmin.

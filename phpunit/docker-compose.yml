@@ -10,7 +10,7 @@ services:
         ports:
             - ${VALUE_NGINX_PORT}:80
         volumes:
-            - ./www/:/usr/local/apache2/www
+            - ./www/:/home/www/
             - ./.docker/containers/nginx/nginx.conf:/etc/nginx/nginx.conf
             - ./.docker/containers/nginx/conf.d/:/etc/nginx/conf.d
             - ./.dockertmp/log/nginx:/var/log/nginx/
@@ -32,10 +32,10 @@ services:
                 - VALUE_MHSEND_VERSION=${VALUE_MHSENDMAIL_VERSION}
                 - VALUE_PHP_UNIT_VERSION=${VALUE_PHP_UNIT_VERSION}
         volumes:
-            - ./www/:/usr/local/apache2/www
-            - ./.env:/usr/local/apache2/www/${FOLDER_CONFIG}/.env:rw
-            - ./config/config_sgbd.php:/usr/local/apache2/www/${FOLDER_CONFIG}/config_sgbd.php:rw
-            - ./config/filedotenv.php:/usr/local/apache2/www/${FOLDER_CONFIG}/filedotenv.php:rw
+            - ./www/:/home/www/
+            - ./.env:/home/www/${FOLDER_CONFIG}/.env:rw
+            - ./config/config_sgbd.php:/home/www//${FOLDER_CONFIG}/config_sgbd.php:rw
+            - ./config/filedotenv.php:/home/www//${FOLDER_CONFIG}/filedotenv.php:rw
             - ./config/data:/docker-entrypoint-initdata.d:rw
             - ./config/dockercron:/var/docker/cron/dockercron:rw
             - ./.docker/containers/php/opcache-recommended.ini:/usr/local/etc/php/conf.d/opcache-recommended.ini:ro
