@@ -1,0 +1,28 @@
+# variable environnement
+ARG VALUE_PGADMIN_VERSION
+ARG DEF_PGADMIN_VERSION=${VALUE_PGADMIN_VERSION:-"8.8"}
+# config install php
+FROM dpage/pgadmin4:${DEF_PGADMIN_VERSION}
+
+USER root
+
+ENV PGADMIN_FOLDER_PROG="/pgadmin4/"
+ARG PGADMIN_SGBD_PROJECT
+ENV PGADMIN_SGBD_PROJECT=${PGADMIN_SGBD_PROJECT:-"project"}
+ARG PGADMIN_SGBD_DATABASE
+ENV PGADMIN_SGBD_DATABASE=${PGADMIN_SGBD_DATABASE:-"project"}
+ARG PGADMIN_SGBD_USER
+ENV PGADMIN_SGBD_USER=${PGADMIN_SGBD_USER:-"root"}
+ARG PGADMIN_SGBD_PASSWORD
+ENV PGADMIN_SGBD_PASSWORD=${PGADMIN_SGBD_PASSWORD:-"secret"}
+ARG PGADMIN_SGBD_PORT
+ENV PGADMIN_SGBD_PORT=${PGADMIN_SGBD_PORT:-5432}
+ARG PGADMIN_SGBD_GROUP
+ENV PGADMIN_SGBD_GROUP=${PGADMIN_SGBD_GROUP:-"project"}
+ARG PGADMIN_SGBD_HOST
+ENV PGADMIN_SGBD_HOST=${PGADMIN_SGBD_HOST:-"localhost"}
+
+COPY createserversjson.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/createserversjson.sh
+
+RUN sed -i "s/#!\/bin\/sh/#!\/bin\/sh\n\/bin\/sh \/usr\/local\/bin\/createserversjson.sh >> \/var\/log\/out.log 2>> \/var\/log\/error.log/" "/entrypoint.sh"

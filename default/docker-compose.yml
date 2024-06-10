@@ -67,20 +67,27 @@ services:
             - POSTGRES_PASSWORD=${SGBD_PASSWORD}
             
 ###########################
-# Setup the PhpMyAdmin container
+# Setup the Pgadmin container
 ###########################
     pgadmin:
         container_name: ${NAME_PROJECT}_phppgadmin
         restart: always
-        image: neimheadh/phppgadmin:${VALUE_PHPPGADMIN_VERSION}
+        build:
+            context: ./.docker/images/pgadmin4/
+            args:
+                - VALUE_PGADMIN_VERSION=${VALUE_PGADMIN_VERSION}
         environment:
-            - POSTGRES_PORT=5432
-            - POSTGRES_HOST=${NAME_PROJECT}_postgres
-            - POSTGRES_USER=root
-            - POSTGRES_PASS=${SGBD_PASSWORD}
+            - PGADMIN_SGBD_DATABASE=${SGBD_DATABASE}
+            - PGADMIN_SGBD_USER=root
+            - PGADMIN_SGBD_PASSWORD=${SGBD_PASSWORD}
+            - PGADMIN_SGBD_HOST=${NAME_PROJECT}_postgres
+            - PGADMIN_DEFAULT_EMAIL=root@root.fr
+            - PGADMIN_DEFAULT_PASSWORD=${SGBD_PASSWORD}
+            - PGADMIN_CONFIG_SERVER_MODE=False
+            - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
         ports:
-            - ${VALUE_PHPPGADMIN_PORT}:80
-        depends_on: 
+            - ${VALUE_PGADMIN_PORT}:80
+        depends_on:
             - postgres
             
 ###########################

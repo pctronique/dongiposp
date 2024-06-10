@@ -62,10 +62,10 @@ Les versions :
   <li>php:8.3.7RC1-fpm</li>
   <li>composer:2.7.4</li>
   <li>xdebug:3.3.2</li>
-  <li>postgres:14.12</li>
+  <li>postgres:17beta1</li>
   <li>mailhog:v1.0.0</li>
   <li>mhsendmail:v0.2.0</li>
-  <li>phppgadmin:7.13.0</li>
+  <li>pgadmin4:8.8</li>
   <li>phpunit:11.1.3</li>
 </ul>
 
@@ -99,7 +99,7 @@ $ cp .env.example .env
 Il est possible de modifier les ports dans le fichier « .env » (il est préférable de conserver les ports par défaut dans l’exemple).
 ```
 VALUE_NGINX_PORT=80
-VALUE_PHPPGADMIN_PORT=8080
+VALUE_PGADMIN_PORT=8080
 VALUE_MAILHOG_PORT=8020
 VALUE_POSTGRES_PORT=5430
 ```
@@ -114,7 +114,7 @@ VALUE_POSTGRES_PORT=5430
 > => 1 pour le projet 1
 > ```
 > VALUE_NGINX_PORT=81
-> VALUE_PHPPGADMIN_PORT=8081
+> VALUE_PGADMIN_PORT=8081
 > VALUE_MAILHOG_PORT=8021
 > VALUE_POSTGRES_PORT=5431
 > ```
@@ -122,7 +122,7 @@ VALUE_POSTGRES_PORT=5430
 > => 2 pour le projet 2
 > ```
 > VALUE_NGINX_PORT=82
-> VALUE_PHPPGADMIN_PORT=8082
+> VALUE_PGADMIN_PORT=8082
 > VALUE_MAILHOG_PORT=8022
 > VALUE_POSTGRES_PORT=5432
 > ```
@@ -237,9 +237,6 @@ Par le nouveau chemin :
 Il va permettre de récupérer les bases de données par défaut.
 Vous devez placer les fichiers sql dans le dossier « ./config/sgbd_data/ » pour récupérer une base de données par défaut.
 
-> [!WARNING]
-> Problème d'exportation de la base de données sur phppgadmin.
-
 ### Email data
 
 Il va permettre de récupérer les emails par défaut.
@@ -296,10 +293,10 @@ VALUE_NGINX_VERSION=1.26.0-perl
 VALUE_PHP_VERSION=8.3.7RC1-fpm
 VALUE_COMPOSER_VERSION=2.7.4
 VALUE_XDEBUG_VERSION=3.3.2
-VALUE_POSTGRES_VERSION=14.12
+VALUE_POSTGRES_VERSION=17beta1
 VALUE_MAILHOG_VERSION=v1.0.0
 VALUE_MHSENDMAIL_VERSION=v0.2.0
-VALUE_PHPPGADMIN_VERSION=7.13.0
+VALUE_PGADMIN_VERSION=8.8
 VALUE_PHP_UNIT_VERSION=11.1.3
 ```
 
@@ -318,9 +315,6 @@ VALUE_XDEBUG_VERSION=
 VALUE_POSTGRES_VERSION=latest
 VALUE_MAILHOG_VERSION=latest
 VALUE_MHSENDMAIL_VERSION=latest
-VALUE_PHPPGADMIN_VERSION=latest
+VALUE_PGADMIN_VERSION=latest
 VALUE_PHP_UNIT_VERSION=
 ```
-
-> [!WARNING]
-> Faire attention sur la compatibilité des versions entre postgres et phppgadmin.
